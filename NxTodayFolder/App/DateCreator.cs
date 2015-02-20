@@ -11,12 +11,20 @@ namespace ir.btapp.NxTodayFolder.App
     {
         public static string jalaliDate()
         {
-            PersianCalendar pc = new PersianCalendar();
-            DateTime dt = DateTime.Now;
+            DateTime output;
 
-            String output = pc.GetYear(dt) + "" + pc.GetMonth(dt).ToString("00") + "" + pc.GetDayOfMonth(dt).ToString("00");
+            if(UserOption.Default.DATE_TYPE == "J")
+            {
+                PersianCalendar pc = new PersianCalendar();
+                DateTime dt = DateTime.Now;
+                output = new DateTime(pc.GetYear(dt), pc.GetMonth(dt), pc.GetDayOfMonth(dt));
+            }
+            else
+            {
+                output = DateTime.Now;
+            }
 
-            return output;
+            return output.ToString(UserOption.Default.DATE_FORMAT);
         }//eof
 
     }//eoc
