@@ -9,11 +9,11 @@ namespace ir.btapp.NxTodayFolder.App
 {
     class DateCreator
     {
-        public static string jalaliDate()
+        public static string getDate(string format = null)
         {
             DateTime output;
 
-            if(UserOption.Default.DATE_TYPE == "J")
+            if (UserOption.Default.DATE_TYPE == "J")
             {
                 PersianCalendar pc = new PersianCalendar();
                 DateTime dt = DateTime.Now;
@@ -24,7 +24,10 @@ namespace ir.btapp.NxTodayFolder.App
                 output = DateTime.Now;
             }
 
-            return output.ToString(UserOption.Default.DATE_FORMAT);
+            if (format == null)
+                return output.ToString(UserOption.Default.DATE_FORMAT);
+            else
+                return output.ToString(format);
         }//eof
 
     }//eoc

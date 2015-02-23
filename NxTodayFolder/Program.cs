@@ -8,44 +8,51 @@ using System.IO;
 
 namespace ir.btapp.NxTodayFolder
 {
-class Program
-{
-    static void Main(string[] args)
+    class Program
     {
-        if (args.Length == 0)
+        static void Main(string[] args)
         {
-            Commands.Welcome();
-
-            while (true) switch (Commands.GetUserChoice())
+            if (args.Length == 0)
             {
-                case "1":
-                    Commands.AddUpdateCMItem();
-                    break;
-                case "2":
-                    Commands.RemoveCMItem();
-                    break;
-                case "3":
-                    Commands.GetTodayDate();
-                    break;
-                case "4":
-                    Commands.AboutApp();
-                    break;
+                Commands.Welcome();
 
-                case "0":
-                    Environment.Exit(1);
-                    break;
+                while (true) switch (Commands.GetUserChoice())
+                    {
+                        case "1":
+                            Commands.AddUpdateCMItem();
+                            break;
+                        case "2":
+                            Commands.RemoveCMItem();
+                            break;
+                        case "3":
+                            Commands.GetTodayDate();
+                            break;
+                        case "4":
+                            Commands.ChangeCalendarType();
+                            break;
+                        case "5":
+                            Commands.ChangeDateFormat();
+                            break;
+                        case "6":
+                            Commands.AboutApp();
+                            break;
+
+                        case "0":
+                            Environment.Exit(1);
+                            break;
+                    }
             }
-        }
-        else //if arguments were provided
-        {
-            String path = args[0] + '\\' + DateCreator.jalaliDate();
+            else //if arguments were provided
+            {
+                String path = args[0] + '\\' + DateCreator.getDate();
 
+                path = path.Replace('\'', '\\').Replace('\"', '\\');
 
-            if (Directory.Exists(path))
-                System.Diagnostics.Process.Start(@path);
-            else
-                Directory.CreateDirectory(path);
-        }
-    }//eof
-}//eoc
+                if (Directory.Exists(path))
+                    System.Diagnostics.Process.Start(@path);
+                else
+                    Directory.CreateDirectory(path);
+            }
+        }//eof
+    }//eoc
 }//eons
